@@ -12,10 +12,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import aiosqlite
 
-from app.database import init_db, get_db, get_alert_by_id, get_alert_events, dismiss_alert
-from app.incident_detector import detect_incidents
-from app.ai_analyzer import AIAnalyzer, analyze_pending_incidents
-from app.event_simulator import EventSimulator
+from database import init_db, get_db, get_alert_by_id, get_alert_events, dismiss_alert
+from incident_detector import detect_incidents
+from ai_analyzer import AIAnalyzer, analyze_pending_incidents
+from event_simulator import EventSimulator
 
 # Global state
 ai_analyzer = AIAnalyzer()
@@ -59,9 +59,9 @@ app.add_middleware(
 )
 
 # Static files
-os.makedirs("app/static", exist_ok=True)
-os.makedirs("app/templates", exist_ok=True)
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+os.makedirs("static", exist_ok=True)
+os.makedirs("templates", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # ============= Event Streaming =============
 
@@ -299,7 +299,7 @@ async def get_stats():
 @app.get("/")
 async def index():
     """Serve dashboard."""
-    return FileResponse("app/templates/index.html")
+    return FileResponse("templates/index.html")
 
 @app.get("/health")
 async def health_check():
@@ -335,4 +335,4 @@ async def background_analysis_loop():
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
-    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=False)
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
