@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHorizon SOC</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🌍 EventHorizon SOC</h1>
+                <p class="subtitle">Turning thousands of raw security events into meaningful incidents</p>
+            </div>
+            <div class="health-indicator" id="healthIndicator">● Connecting...</div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard">
+            <!-- Stats Panel -->
+            <section class="stats-panel">
+                <div class="stat-card critical">
+                    <div class="stat-number" id="criticalCount">0</div>
+                    <div class="stat-label">CRITICAL</div>
+                </div>
+                <div class="stat-card high">
+                    <div class="stat-number" id="highCount">0</div>
+                    <div class="stat-label">HIGH</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="eventCount">0</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-card alert">
+                    <div class="stat-number" id="alertCount">0</div>
+                    <div class="stat-label">Pending Alerts</div>
+                </div>
+            </section>
+
+            <!-- Main Content Grid -->
+            <div class="main-grid">
+                <!-- Events Table -->
+                <section class="panel events-panel">
+                    <h2>📊 Live Events Stream</h2>
+                    <div class="controls">
+                        <button id="startStreamBtn" class="btn btn-primary">Start Stream</button>
+                        <button id="analyzeBtn" class="btn btn-secondary">Analyze</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="eventsTable">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Event</th>
+                                    <th>Source</th>
+                                    <th>Location</th>
+                                    <th>Person</th>
+                                    <th>Severity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventsTableBody">
+                                <tr><td colspan="6">No events yet</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Toast Alerts -->
+                <section class="panel alerts-panel">
+                    <h2>🚨 Security Alerts</h2>
+                    <div class="toast-container" id="toastContainer">
+                        <div class="no-alerts">No active alerts</div>
+                    </div>
+                </section>
+
+                <!-- Incidents -->
+                <section class="panel incidents-panel">
+                    <h2>🔍 Correlated Incidents</h2>
+                    <div class="table-container">
+                        <table id="incidentsTable">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Person</th>
+                                    <th>Severity</th>
+                                    <th>Risk</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incidentsTableBody">
+                                <tr><td colspan="6">No incidents</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Detail Modal -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h2 id="modalTitle">Alert Details</h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

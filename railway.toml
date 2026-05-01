@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[env]
+PYTHONUNBUFFERED = "1"
+
+[deploy]
+startCommand = "gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app"
